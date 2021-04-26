@@ -1,0 +1,44 @@
+﻿@model PagedList.IPagedList<Models.Framework.PublishingCompany>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Asset/Asset Admin/js/controller/IndexPublishingCompany.js"></script>
+}
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>#</th>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr class="odd gradeX" id="row_@item.ID">
+                    <td>@item.ID</td>
+                    <td>
+                        <a href="/Admin/PublishingCompany/Edit/@item.ID">Edit</a> |
+                        <a href="#" class="btn_delete" data-id=@item.ID>Delete</a>
+                    </td>
+                    <td>@item.Name</td>
+                    <td class="center">@item.PhoneNumber</td>
+                    <td class="center"><a href="#" class="btn_active" data-id=@item.ID>@(item.Status==true?"Active":"Block")</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a href="/Admin/PublishingCompany/Create" class="btn btn-default">Tạo mới</a>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>
+<!-- /.table-responsive -->

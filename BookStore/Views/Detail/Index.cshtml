@@ -1,0 +1,239 @@
+﻿@model BookStore.Models.DetailView
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var strContent = Model.BookView.Detail;
+    var RazorContent = new HtmlString(strContent);
+}
+@section scripts{
+    <script src="~/Asset/Asset User/js/controller/DetailModel.js"></script>
+    <script src="~/Asset/Asset User/js/jquery.magnific-popup.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.popup-with-zoom-anim').magnificPopup({
+                type: 'inline',
+                fixedContentPos: false,
+                fixedBgPos: true,
+                overflowY: 'auto',
+                closeBtnInside: true,
+                preloader: false,
+                midClick: true,
+                removalDelay: 300,
+                mainClass: 'my-mfp-zoom-in'
+            });
+
+        });
+    </script>
+
+    <script src="~/Asset/Asset User/js/imagezoom.js"></script>
+
+    <link rel="stylesheet" href="~/Asset/Asset User/css/flexslider.css" type="text/css" media="screen" />
+    <script src="~/Asset/Asset User/js/jquery.flexslider.js"></script>
+    <script>
+        // Can also be used with $(document).ready()
+        $(window).load(function () {
+            $('.flexslider').flexslider({
+                animation: "slide",
+                controlNav: "thumbnails"
+            });
+        });
+    </script>
+}
+
+<div class="ads-grid py-sm-5 py-4">
+    <div class="container py-xl-4 py-lg-2">
+        <div class="row">
+            <div class="agileinfo-ads-display col-lg-9">
+                <div class="wrapper">
+                    <!-- first section -->
+
+                    <div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
+                        <!-- Single Page -->
+                        <ul class="breadcrumb">
+                            <li><a href="/trang-chu">Trang Chủ</a></li>
+                            @Html.Raw(Model.BookView.LinkCategories)
+                        </ul>
+                        <hr>
+                        <div class="banner-bootom-w3-agileits">
+                            <div class="container py-xl-4 py-lg-2">
+                                <div class="row">
+                                    <div class="col-lg-5 col-md-8 single-right-left ">
+                                        <div class="grid images_3_of_2">
+                                            <div class="flexslider">
+                                                <ul class="slides">
+                                                    <li>
+                                                        <div class="thumb-image">
+                                                            <img src="@Model.BookView.Image" data-imagezoom="true" class="img-fluid " alt="">
+                                                        </div>
+                                                    </li>
+
+                                                </ul>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-7 single-right-left simpleCart_shelfItem">
+                                        <h3 class="mb-3">@Model.BookView.Name</h3>
+                                        <p class="mb-3">
+                                            @{if (Model.BookView.Price != Model.BookView.PromotionPrice)
+                                                {
+                                                    <span class="item_price">@Model.BookView.PromotionPrice.Value.ToString("N0") ₫</span>
+                                                    <del class="mx-2 font-weight-light">@Model.BookView.Price.Value.ToString("N0") ₫</del>
+
+                                                }
+                                                else
+                                                {
+                                                    <span class="item_price">@Model.BookView.Price.Value.ToString("N0") ₫</span>
+                                                }
+
+                                                if (Model.BookView.IncludeVAT == true)
+                                                {
+                                                    <label>(Đã VAT)</label>
+                                                }
+                                                else
+                                                {
+                                                    <label>(Chưa VAT)</label>
+                                                }
+                                            }
+                                        </p>
+                                        <div class="single-infoagile">
+                                            <ul>
+                                                <li class="mb-3">
+                                                    Tác Giả: @Html.Raw(@Model.BookView.LinkAuthor)
+                                                </li>
+                                                <li class="mb-3">
+                                                    Nhà Xuất Bản: @Html.Raw(@Model.BookView.LinkPublishingCompany)
+                                                </li>
+                                                <li class="mb-3">
+                                                    Tình Trạng: @{
+                                                        if (Model.BookView.Quantity > 0)
+                                                        {
+                                                            <span style="color:forestgreen">Còn Hàng (@Model.BookView.Quantity sản phẩm)</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span style="color:red">Hết Hàng</span>
+                                                        }
+                                                    }
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default btn-number" disabled data-type="minus" data-field="quant[@Model.BookView..ID]">
+                                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                                </button>
+                                            </span>
+                                            <input type="text" name="quant[@Model.BookView.ID]" class="input-number" data-id="@Model.BookView.ID" value=@(Model.BookView.Quantity > 0 ? 1 : 0) size=2 min="1" max=@Model.BookView.Quantity readonly>
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default btn-number" data-type="plus" @(Model.BookView.Quantity > 1 ? "" : "disabled") data-field="quant[@Model.BookView.ID]">
+                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                        <div style="margin-top:10px;margin-left:10px">
+                                            <a href="#" data-id=@Model.BookView.ID class="link-product-add-cart btn-add-item-to-cart @(Model.BookView.Quantity > 1 ? "" : "isDisabled")"> Thêm vào giỏ </a>
+                                        </div>
+                                        <hr>
+                                        <div>
+
+                                            Thông tin kèm theo<br />
+                                            <em>
+                                                <i class="fa fa-check" aria-hidden="true"></i> Miễn phí giao hàng toàn quốc cho đơn hàng từ 250.000đ<br />
+                                                <i class="fa fa-check" aria-hidden="true"></i> Bọc sách plastic cao cấp miễn cho sách này<br />
+                                                <i class="fa fa-check" aria-hidden="true"></i> Hỗ trợ dịch vụ gói quà<br />
+                                            </em>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <hr>
+                                <ul class="horizontal-list">
+                                    <li class="active-horizontal-list"><a href="#DetailContent">Giới Thiệu Sách</a></li>
+                                    <li><a href="#DetailInformation">Thông Tin Chi Tiết</a></li>
+                                    <li><a href="#Comment">Bình Luận</a></li>
+                                </ul>
+                                <div id="DetailContent" class="book-content ">
+                                    <h5>@Model.BookView.Name</h5>
+                                    @RazorContent
+                                </div>
+
+                                <hr />
+                                <div id="DetailInformation">
+
+                                    <h5>Thông Tin Chi Tiết</h5>
+                                    <table class="table table-borderless" style="margin-right:10%;width:40%;font-size:11px ;display:inline">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Tác giả</th>
+                                                <td>@Html.Raw(Model.BookView.LinkAuthor)</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Khối Lượng</th>
+                                                <td>308.0 gram</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Định Dạng</th>
+                                                <td colspan="2">Bìa cứng</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Nhà Xuất Bản</th>
+                                                <td colspan="2"> @Html.Raw(Model.BookView.LinkPublishingCompany)</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="table table-borderless" style="margin-right:10%; width:40%;font-size:11px ;display:inline">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Ngày Phát hành</th>
+                                                <td>@Model.BookView.PublicationDate.Value.ToString("dd/MM/yyyy")</td>
+
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Kích thước:</th>
+                                                <td>13 x 19 cm</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Số trang:</th>
+                                                <td colspan="2"> 184</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Ngôn Ngữ:</th>
+                                                <td colspan="2"> Việt Nam</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div id="Comment">
+                                    <hr />
+                                    <h5>Bình Luận</h5>
+                                    <input class="form-control" type="text" style="width:80%" />
+                                </div>
+                            </div>
+                            <!-- //Single Page -->
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-lg-3 mt-lg-0 mt-4 p-lg-0 " style="background:white">
+                <div class="side-bar p-sm-4 p-3">
+                    <h6>Có thể bạn quan tâm</h6>
+
+                    @{foreach (var item in Model.ListSuggest)
+                        {
+                            <div class="item-slide-right">
+                                <a href="/chi-tiet/@item.MetaTitle-@item.ID"><img src="@item.Image"></a>
+                                <a href="/chi-tiet/@item.MetaTitle-@item.ID" class="truncate-overflow" data-toggle="tooltip" data-placement="left" title="@item.Name">@item.Name</a>
+                            </div>
+                        }
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

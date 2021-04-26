@@ -1,0 +1,215 @@
+﻿@model BookStore.Models.ProductViewHome
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script src="~/Asset/Asset User/js/controller/HomeModel.js"></script>
+}
+
+<!-- banner -->
+@{Html.RenderAction("banner", "homei");}
+<!-- //banner -->
+<!-- top Products -->
+<div class="ads-grid py-sm-5 py-4">
+    <div class="container py-xl-4 py-lg-2">
+        <!-- tittle heading -->
+        <h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
+            <span>T</span>rang
+            <span>C</span>hủ
+        </h3>
+        <!-- //tittle heading -->
+        <div class="row">
+            <!-- product left -->
+            <div class="agileinfo-ads-display col-lg-9">
+                <div class="wrapper">
+                    <!-- first section -->
+                    <div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
+                        <h3 class="heading-tittle text-center font-italic">Sách Mới Ra Mắt</h3>
+                        <div class="row">
+                            @foreach (var item in Model.New)
+                            {
+                                <div class="col-md-4 product-men mt-5">
+                                    <div class="men-pro-item simpleCart_shelfItem">
+                                        <div class="men-thumb-item text-center">
+                                            <img src=@item.Image alt="">
+                                            <div class="men-cart-pro">
+                                                <div class="inner-men-cart-pro">
+                                                    <a href="/chi-tiet/@item.MetaTitle-@item.ID" class="link-product-add-cart">Chi Tiết</a>
+                                                </div>
+                                            </div>
+                                            <div class="product-top">
+                                                @{
+                                                    if ((DateTime.Now - item.CreateDate).TotalDays < 7)
+                                                    {
+                                                        <div class="product-new-top">New</div>
+                                                    }
+                                                    if (item.TopHot == true)
+                                                    {
+                                                        <div class="product-hot-top">Hot <i class="fab fa-hotjar"></i></div>
+                                                    }
+                                                    if (item.Price != item.PromotionPrice)
+                                                    {
+                                                        <div class="product-sale-top">Sale @(((item.Price-item.PromotionPrice)/item.Price*100).Value.ToString("N0"))%</div>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="item-info-product text-center border-top mt-4">
+                                            <h4 class="pt-1 text-truncate">
+                                                <a href="/chi-tiet/@item.MetaTitle-@item.ID" data-toggle="tooltip" data-placement="left" title="@item.Name">@item.Name</a>
+
+                                            </h4>
+                                            <div class="info-product-price my-2">
+                                                @if (item.Price != item.PromotionPrice)
+                                                {
+                                                    <span class="item_price">@item.PromotionPrice.Value.ToString("N0")₫</span>
+                                                    <del>@item.Price.Value.ToString("N0")₫</del>
+                                                }
+                                                else
+                                                {
+                                                    <span class="item_price">@item.Price.Value.ToString("N0")₫</span>
+                                                }
+                                            </div>
+                                            <div class="item_add">
+                                                <a href="#" data-id=@item.ID data-quantity=1 class="link-product-add-cart btn-add-item-to-cart"> Thêm vào giỏ </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+                            <div class="see-more col-lg-12 mt-4"><a href="/moi-ra-mat">Xem thêm >></a></div>
+                        </div>
+                    </div>
+                    <!-- //first section -->
+                    <!-- third section -->
+                    <div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
+                        <h3 class="heading-tittle text-center font-italic">Giảm Giá</h3>
+                        <div class="row">
+                            @foreach (var item in Model.Sale)
+                            {
+                                <div class="col-md-4 product-men mt-5">
+                                    <div class="men-pro-item simpleCart_shelfItem">
+                                        <div class="men-thumb-item text-center">
+                                            <img src=@item.Image alt="">
+                                            <div class="men-cart-pro">
+                                                <div class="inner-men-cart-pro">
+                                                    <a href="/chi-tiet/@item.MetaTitle-@item.ID" class="link-product-add-cart">Chi Tiết</a>
+                                                </div>
+                                            </div>
+                                            <div class="product-top">
+                                                @{
+                                                    if ((DateTime.Now - item.CreateDate).TotalDays < 7)
+                                                    {
+                                                        <div class="product-new-top">New</div>
+                                                    }
+                                                    if (item.TopHot == true)
+                                                    {
+                                                        <div class="product-hot-top">Hot <i class="fab fa-hotjar"></i></div>
+                                                    }
+                                                    if (item.Price != item.PromotionPrice)
+                                                    {
+                                                        <div class="product-sale-top">Sale @(((item.Price-item.PromotionPrice)/item.Price*100).Value.ToString("N0"))%</div>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="item-info-product text-center border-top mt-4">
+                                            <h4 class="pt-1 text-truncate">
+                                                <a href="/chi-tiet/@item.MetaTitle-@item.ID" data-toggle="tooltip" data-placement="left" title="@item.Name">@item.Name</a>
+
+                                            </h4>
+                                            <div class="info-product-price my-2">
+                                                @if (item.Price != item.PromotionPrice)
+                                                {
+                                                    <span class="item_price">@item.PromotionPrice.Value.ToString("N0")₫</span>
+                                                    <del>@item.Price.Value.ToString("N0")₫</del>
+                                                }
+                                                else
+                                                {
+                                                    <span class="item_price">@item.Price.Value.ToString("N0")₫</span>
+                                                }
+                                            </div>
+                                            <div class="item_add">
+                                                <a href="#" data-id=@item.ID data-quantity=1 class="link-product-add-cart btn-add-item-to-cart"> Thêm vào giỏ </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+                            <div class="see-more col-lg-12 mt-4"><a href="/giam-gia">Xem thêm >></a></div>
+                        </div>
+                    </div>
+                    <!-- //third section -->
+                    <!-- fourth section -->
+                    <div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
+                        <h3 class="heading-tittle text-center font-italic">Bán Chạy</h3>
+                        <div class="row">
+                            @foreach (var item in Model.Bestseller)
+                            {
+                                <div class="col-md-4 product-men mt-5">
+                                    <div class="men-pro-item simpleCart_shelfItem">
+                                        <div class="men-thumb-item text-center">
+                                            <img src=@item.Image alt="">
+                                            <div class="men-cart-pro">
+                                                <div class="inner-men-cart-pro">
+                                                    <a href="/chi-tiet/@item.MetaTitle-@item.ID" class="link-product-add-cart">Chi Tiết</a>
+                                                </div>
+                                            </div>
+                                            <div class="product-top">
+                                                @{
+                                                    if ((DateTime.Now - item.CreateDate).TotalDays < 7)
+                                                    {
+                                                        <div class="product-new-top">New</div>
+                                                    }
+                                                    if (item.TopHot == true)
+                                                    {
+                                                        <div class="product-hot-top">Hot <i class="fab fa-hotjar"></i></div>
+                                                    }
+                                                    if (item.Price != item.PromotionPrice)
+                                                    {
+                                                        <div class="product-sale-top">Sale @(((item.Price-item.PromotionPrice)/item.Price*100).Value.ToString("N0"))%</div>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="item-info-product text-center border-top mt-4">
+                                            <h4 class="pt-1 text-truncate">
+                                                <a href="/chi-tiet/@item.MetaTitle-@item.ID" data-toggle="tooltip" data-placement="left" title="@item.Name">@item.Name</a>
+
+                                            </h4>
+                                            <div class="info-product-price my-2">
+                                                @if (item.Price != item.PromotionPrice)
+                                                {
+                                                    <span class="item_price">@item.PromotionPrice.Value.ToString("N0")₫</span>
+                                                    <del>@item.Price.Value.ToString("N0")₫</del>
+                                                }
+                                                else
+                                                {
+                                                    <span class="item_price">@item.Price.Value.ToString("N0")₫</span>
+                                                }
+                                            </div>
+                                            <div class="item_add">
+                                                <a href="#" data-id=@item.ID data-quantity=1 class="link-product-add-cart btn-add-item-to-cart"> Thêm vào giỏ </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+                            <div class="see-more col-lg-12 mt-4"><a href="/ban-chay">Xem thêm >></a></div>
+                        </div>
+                    </div>
+                    <!-- //fourth section -->
+                </div>
+            </div>
+            <!-- //product left -->
+            <!-- product right -->
+            @{ Html.RenderAction( "ProductRight", "homei");}
+            <!--//product right-->
+        </div>
+    </div>
+</div>
+<!-- //top products -->

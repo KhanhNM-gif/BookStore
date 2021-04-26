@@ -1,0 +1,151 @@
+﻿<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <title>Electro Store Ecommerce Category Bootstrap Responsive Web Template | Home :: w3layouts</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="Electro Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <link href="https://fonts.googleapis.com/css2?family=Lemonada:wght@300;400;500;515;600;700&family=Recursive:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //Meta tag Keywords -->
+    <!-- Custom-Files -->
+
+    <link href="~/Asset/Asset User/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <!-- Bootstrap css -->
+    <link href="~/Asset/Asset User/css/MySet.css" rel="stylesheet" />
+    <link href="~/Asset/Asset User/css/style.css" rel="stylesheet" type="text/css" media="all" />
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/Asset/Asset User/css/fontawesome-all.css">
+    <!-- Font-Awesome-Icons-CSS -->
+    <link href="~/Asset/Asset User/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- pop-up-box -->
+    <link href="~/Asset/Asset User/css/menu.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- menu style -->
+    <!-- //Custom-Files -->
+</head>
+
+<body>
+    <!-- top-header -->
+    @{Html.RenderAction("AgileMainTop", "homei");}
+    <!-- log in -->
+    @{Html.RenderAction("LoginModal", "homei");}
+    <!-- //top-header -->
+    <!-- header-bottom-->
+    @{Html.RenderAction("headerBot", "homei");}
+    <!-- shop locator (popup) -->
+    <!-- //header-bottom -->
+    <!-- navigation -->
+    @{Html.RenderAction("MainMenu", "homei");}
+    <!-- //navigation -->
+    <!-- top Products -->
+    @RenderBody()
+    <!-- //top products -->
+    <!-- middle section -->
+    @{Html.RenderAction("Ads", "homei");}
+    <!-- middle section -->
+    <!-- footer -->
+    @{Html.RenderAction("footer", "homei");}
+    <!-- //footer -->
+    <!-- js-files -->
+    <!-- jquery -->
+
+
+
+    <script src="~/Asset/Asset User/js/jquery-2.2.3.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <!-- //jquery -->
+    <!-- nav smooth scroll -->
+    <script>
+        $(document).ready(function () {
+            $(".dropdown").hover(
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                    $(this).toggleClass('open');
+                },
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                    $(this).toggleClass('open');
+                }
+            );
+        });
+    </script>
+    <!-- //nav smooth scroll -->
+    <!-- popup modal (for location)-->
+    <script src="~/Asset/Asset User/js/jquery.magnific-popup.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.popup-with-zoom-anim').magnificPopup({
+                type: 'inline',
+                fixedContentPos: false,
+                fixedBgPos: true,
+                overflowY: 'auto',
+                closeBtnInside: true,
+                preloader: false,
+                midClick: true,
+                removalDelay: 300,
+                mainClass: 'my-mfp-zoom-in'
+            });
+
+        });
+    </script>
+    <!-- //popup modal (for location)-->
+    <!-- scroll seller -->
+    <script src="~/Asset/Asset User/js/scroll.js"></script>
+    <!-- //scroll seller -->
+    <!-- smoothscroll -->
+    <!-- //smoothscroll -->
+    <!-- start-smooth-scrolling -->
+    <script src="~/Asset/Asset User/js/move-top.js"></script>
+    <script src="~/Asset/Asset User/js/easing.js"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+
+                $('html,body').animate({
+                    scrollTop: $(this.hash).offset().top
+                }, 1000);
+            });
+        });
+    </script>
+    <!-- //end-smooth-scrolling -->
+    <!-- smooth-scrolling-of-move-up -->
+    <script>
+        $().UItoTop({
+            easingType: 'easeOutQuart'
+        });
+        $().Cart({
+            easingType: 'easeOutQuart'
+        });
+    </script>
+    <!-- //smooth-scrolling-of-move-up -->
+    <!-- for bootstrap working -->
+    <script src="~/Asset/Asset User/js/bootstrap.js"></script>
+    <!-- //for bootstrap working -->
+    <script src="~/Asset/Asset User/js/controller/LayoutModel.js"></script>
+    <script src="~/Asset/Asset User/js/Cart.js"></script>
+    @RenderSection("scripts", required: false)
+    
+    <!-- //for bootstrap working -->
+    <!-- //js-files -->
+</body>
+
+</html>

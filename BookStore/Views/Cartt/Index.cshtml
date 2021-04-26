@@ -1,0 +1,82 @@
+﻿@model BookStore.Models.ListCartItem
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script src="~/Asset/Asset User/js/controller/CartModel.js"></script>
+}
+<div class="ads-grid py-sm-5 py-4">
+    <div class="container py-xl-4 py-lg-2">
+        <h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
+            <span>G</span>iỏ
+            <span>H</span>àng
+            
+        </h3>
+
+        @{ if (Model.Item.Count != 0)
+            {
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>Mã Sách</td>
+                            <td>Tên Sách</td>
+                            <td>Hình Ảnh</td>
+                            <td>Đơn giá(VNĐ)</td>
+                            <td>Số lượng</td>
+                            <td>Tổng</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Item)
+                        {
+                            <tr id="row_@item.Book.ID">
+                                <td>@item.Book.ID</td>
+                                <td>@item.Book.Name</td>
+                                <td><img src=@item.Book.Image width="180" height="230"> </td>
+                                <td>
+                                    @(item.Book.PromotionPrice<item.Book.Price ?item.Book.PromotionPrice.Value.ToString("N0") : item.Book.Price.Value.ToString("N0"))₫
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default btn-number" @(item.Quantity == 1 ? "disabled" : "") data-type="minus" data-field="quant[@item.Book.ID]">
+                                                <i class="fa fa-minus" aria-hidden="true"></i>
+                                            </button>
+                                        </span>
+                                        <input type="text" name="quant[@item.Book.ID]" class="form-control input-number" data-id="@item.Book.ID" value=@item.Quantity size="2" min="1" max="99" readonly>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[@item.Book.ID]">
+                                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </td>
+
+                                <td>@((item.Quantity * (item.Book.PromotionPrice < item.Book.Price ? item.Book.PromotionPrice: item.Book.Price)).Value.ToString("N0"))₫</td>
+                                <td><a href="#" class="btn-remove-item" data-id=@item.Book.ID><i class="fa fa-trash iconMS" aria-hidden="true"></i></a></td>
+
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="6" class="text-right">Tổng: @Model.Totalmoney.ToString("N0")₫</td>
+                            <td></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+                <a href="/thanh-toan" class="link-product-add-cart">Đặt hàng</a>
+                <a href="/trang-chu" class="link-product-add-cart">Tiếp tục mua hàng</a>
+                <a href="#" class="link-product-add-cart btn-update">Cập nhập</a>
+                <a href="#" class="link-product-add-cart btn-removeAllItemCart">Làm sạch giỏ</a>
+            }
+            else
+            {
+                <div class="alert-warning" style="font-size:20px; text-align:center">Giỏ Hàng chưa có món hàng nào đc chọn</div>
+                <a href="/homei" class="link-product-add-cart">Tiếp tục mua hàng</a>
+            }
+
+        }
+    </div>
+</div>
+

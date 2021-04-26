@@ -1,0 +1,39 @@
+﻿@model BookStore.Models.Search
+<div class="header-bot">
+    <div class="container">
+        <div class="row header-bot_inner_wthreeinfo_header_mid">
+            <!-- logo -->
+            <div class="col-md-3 logo_agile">
+                <h1 class="text-center">
+                    <a href="trang-chu" class="font-weight-bold font-italic">
+                        BookStore
+                    </a>
+                </h1>
+            </div>
+            <!-- //logo -->
+            <!-- header-bot -->
+            <div class="col-md-9 header mt-4 mb-md-0 mb-4">
+                <div class="row">
+                    <!-- search -->
+                    <div class="col-10 agileits_search">
+                        <form class="form-inline" action="/tim-kiem">
+                            <input type="search" class="txtSearch" placeholder="Nhập..." name="search" required="">
+                            <button class="btn my-2 my-sm-0" type="submit">Tìm Kiếm</button>
+                        </form>
+                    </div>
+                    <!-- //search -->
+                    <!-- cart details -->
+                    <div class="col-2 top_nav_right text-center mt-sm-0 mt-2">
+                        <div class="wthreecartaits wthreecartaits2 cart box_1">
+                            <a href="/gio-hang" class="btn w3view-cart">
+                                <i class="fas fa-cart-arrow-down"></i>
+                                <span class="quantityHeardMS cart-quantity"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- //cart details -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

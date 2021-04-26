@@ -1,0 +1,53 @@
+﻿@model BookStore.Models.MenuMain
+<div class="navbar-inner">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+            <div id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto text-center mr-xl-5">
+                    @foreach (var item in Model.menu)
+                    {
+
+                        if (item.isDroplist == true)
+                        {
+                            if (item.ID == 14)
+                            {
+                                <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @item.Name
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <div class="agile_inner_drop_nav_info p-4">
+                                            <h5 class="mb-3">Thể Loại Sách</h5>
+                                            <div class="row">
+                                                <div class="col-sm-6 multi-gd-img">
+                                                    <ul class="multi-column-dropdown">
+                                                        @foreach (var e in Model.categoryView)
+                                                        {
+                                                            <li>
+                                                                <a href="/Category/@e.MetaTitle">@e.Name</a>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            }
+                        }
+                        else
+                        {
+                            <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+                                <a class="nav-link" href=@item.Link>@item.Name<span class="sr-only">(current)</span></a>
+                            </li>
+                        }
+
+                    }
+
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>

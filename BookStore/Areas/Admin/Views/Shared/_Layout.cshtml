@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Start Bootstrap - SB Admin Version 2.0 Demo</title>
+
+    <!-- Core CSS - Include with every page -->
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Asset/Asset Admin/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+
+    <!-- Page-Level Plugin CSS - Dashboard -->
+    <link href="~/Asset/Asset Admin/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+    <link href="~/Asset/Asset Admin/css/plugins/timeline/timeline.css" rel="stylesheet">
+
+    <!-- SB Admin CSS - Include with every page -->
+    <link href="~/Asset/Asset Admin/css/sb-admin.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+            @RenderPage("navbar_header.cshtml")
+            <!-- /.navbar-header -->
+
+            @RenderPage("navbar_right.cshtml")
+            <!-- /.navbar-top-links -->
+
+            @RenderPage("navbar_left.cshtml")
+            <!-- /.navbar-static-side -->
+        </nav>
+        <div id="page-wrapper">
+            <div class="row">
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="alert hide" id="alertBox"></div>
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- /#wrapper -->
+    <!-- Core Scripts - Include with every page -->
+
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Asset/Asset Admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <script src="~/Asset/ckeditor/ckeditor.js"></script>
+    <script src="~/Asset/ckfinder/ckfinder.js"></script>
+
+    <!-- Page-Level Plugin Scripts - Dashboard -->
+    <script src="~/Asset/Asset Admin/js/plugins/morris/raphael-2.1.0.min.js"></script>
+    <script src="~/Asset/Asset Admin/js/plugins/morris/morris.js"></script>
+
+    <!-- SB Admin Scripts - Include with every page -->
+    <script src="~/Asset/Asset Admin/js/sb-admin.js"></script>
+    <!-- Core cripts - Include with every page -->
+    <script src="~/Asset/Asset Admin/js/controller/LayoutModel.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

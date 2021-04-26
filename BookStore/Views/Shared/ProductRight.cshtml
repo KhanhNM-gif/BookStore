@@ -1,0 +1,62 @@
+﻿@model BookStore.Models.ProductRight
+
+<div class="col-lg-3 mt-lg-0 mt-4 p-lg-0">
+    <div class="side-bar p-sm-4 p-3">
+        <div class="search-hotel border-bottom py-2">
+            <h3 class="agileits-sear-head mb-3">Tìm Kiếm</h3>
+            <form class="form-inline" action="/tim-kiem">
+                <input type="search" class="txtSearch" placeholder="Nhập ..." name="search" required="">
+                <input type="submit" value="">
+            </form>
+          
+        </div>
+        <!-- price -->
+        <div class="range border-bottom py-2">
+            <h3 class="agileits-sear-head mb-3">Danh Sách</h3>
+            <a href="/ban-chay" class="item-single-search-bar">Sách Bán Chạy</a>
+            <a href="/giam-gia" class="item-single-search-bar">Sale off</a>
+            <a href="/moi-ra-mat" class="item-single-search-bar">Sách mới ra mắt</a>
+        </div>
+        <!-- //price -->
+        <!-- price -->
+        <div class="range border-bottom py-2">
+            <h3 class="agileits-sear-head mb-3">Thể Loại</h3>
+            @foreach (var item in Model.categories.Where(x => x.IDParent == null))
+            {
+                <div class="list-category">
+                    <a href="/the-loai/@item.MetaTitle-@item.ID" class="dropdownMS">@item.Name</a>
+                    @if (Model.categories.Exists(x => x.IDParent == item.ID))
+                    {
+                        <a href="#" class="drop" data-status=0><i class="fa fa-caret-right" aria-hidden="true"></i></a>
+                        <ul class="ListDrop">
+                            @foreach (var item2 in Model.categories.Where(x => x.IDParent == item.ID))
+                            {
+                                <li><a href="/the-loai/@item.MetaTitle-@item2.MetaTitle-@item2.ID">@item2.Name</a></li>
+                            }
+                        </ul>
+                    }
+                </div>
+            }
+
+
+        </div>
+        <!-- electronics -->
+        <div class="left-side border-bottom py-2">
+            <h3 class="agileits-sear-head mb-3">Tác Giả</h3>
+            @foreach (var item in Model.authors)
+            {
+                <a href="/tac-gia/@item.MetaTitle-@item.ID" class="item-single-search-bar">@item.Name</a>
+            }
+        </div>
+        <!-- //electronics -->
+        <div class="left-side border-bottom py-2">
+            <h3 class="agileits-sear-head mb-3">Nhà Xuất Bản</h3>
+            @foreach (var item in Model.publishingCompanies)
+            {
+                <a href="/nha-xuat-ban/@item.MetaTitle-@item.ID" class="item-single-search-bar">@item.Name</a>
+            }
+        </div>
+        <!-- //arrivals -->
+    </div>
+</div>
+<!-- //product right -->

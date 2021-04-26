@@ -1,0 +1,93 @@
+﻿@model BookStore.Models.ProductViewHome
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <link href="~/Asset/Asset User/css/PagedList.css" rel="stylesheet" />
+}
+
+<!-- banner -->
+<!-- //banner -->
+<!-- top Products -->
+<div class="ads-grid py-sm-5 py-4">
+    <div class="container py-xl-4 py-lg-2">
+        <div class="row">
+            <!-- product left -->
+            <div class="agileinfo-ads-display col-lg-9">
+                <div class="wrapper">
+                    <!-- first section -->
+                    <div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
+                        <!-- Single Page -->
+                        <ul class="breadcrumb">
+                            <li><a href="/trang-chu">Trang Chủ</a></li>
+                            @Html.Raw(ViewBag.LinkRootCategory)
+                            <li>@ViewBag.Name</li>
+
+                        </ul>
+                        <hr>
+                        <div class="mb-3">Kết quả hiển thị : "@ViewBag.Name" cho @ViewBag.Count kết quả</div>
+                        <div class="container pr-xl-2">
+                            <div class="row">
+                                @foreach (var item in Model.Filter)
+                                {
+                                    <div class="col-lg-3 px-lg-3 product-men">
+                                        <div class="men-thumb-item text-center">
+                                            <img src=@item.Image style="height:250px" alt="">
+                                            <div class="men-cart-pro">
+                                                <div class="inner-men-cart-pro">
+                                                    <a href="/chi-tiet/@item.MetaTitle-@item.ID" class="link-product-add-cart">Chi Tiết</a>
+                                                </div>
+                                            </div>
+                                            <div class="product-top">
+                                                @{
+                                                    if ((DateTime.Now - item.CreateDate).TotalDays < 7)
+                                                    {
+                                                        <div class="product-new-top">New</div>
+                                                    }
+                                                    if (item.TopHot == true)
+                                                    {
+                                                        <div class="product-hot-top">Hot <i class="fab fa-hotjar"></i></div>
+                                                    }
+                                                    if (item.Price != item.PromotionPrice)
+                                                    {
+                                                        <div class="product-sale-top">Sale @(((item.Price - item.PromotionPrice) / item.Price * 100).Value.ToString("N0"))%</div>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="item-info-product text-center border-top mt-1">
+                                            <h4 class="pt-1 text-truncate">
+                                                <a href="/chi-tiet/@item.MetaTitle-@item.ID" data-toggle="tooltip" data-placement="left" title="@item.Name">@item.Name</a>
+                                            </h4>
+                                            <div class="info-product-price my-1">
+                                                @if (item.Price != item.PromotionPrice)
+                                                {
+                                                    <span class="item_price">@item.PromotionPrice.Value.ToString("N0")₫</span>
+                                                    <del>@item.Price.Value.ToString("N0")₫</del>
+                                                }
+                                                else
+                                                {
+                                                    <span class="item_price">@item.Price.Value.ToString("N0")₫</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                <div class="col-lg-12" style="text-align:center">@Html.PagedListPager((PagedList.IPagedList<Models.ViewModel.BookShort>)Model.Filter, page => Url.Action("BestSeller", new { page }))</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- //product left -->
+            <!-- product right -->
+            @{ Html.RenderAction("ProductRight", "homei");}
+            <!--//product right-->
+        </div>
+    </div>
+</div>
+
+<!-- //top products -->
